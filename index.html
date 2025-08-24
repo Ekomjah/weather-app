@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css"/>
+  </head>
+
+  <body>
+    <h1>A Weather App</h1>
+    <main>
+      <!-- From Uiverse.io by KSAplay --> 
+      <div class="myCard hidden">
+<div class="card">
+  <section class="landscape-section">
+    <div class="sky"></div>
+    <div class="sun"></div>
+    <div class="hill-1"></div>
+    <div class="hill-2"></div>
+    <div class="ocean">
+      <div class="reflection"></div>
+      <div class="reflection"></div>
+      <div class="reflection"></div>
+      <div class="reflection"></div>
+      <div class="reflection"></div>
+      <div class="shadow-hill-1"></div>
+      <div class="shadow-hill-2"></div>
+    </div>
+    <div class="hill-3"></div>
+    <div class="hill-4"></div>
+    <div class="tree-1">
+      <svg
+        stroke-width="0.00064"
+        stroke="#b77873"
+        fill="#b77873"
+        xml:space="preserve"
+        viewBox="0 0 64.00 64.00"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns="http://www.w3.org/2000/svg"
+        id="Layer_1"
+        version="1.0"
+      >
+        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+        <g
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          id="SVGRepo_tracerCarrier"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M32,0C18.148,0,12,23.188,12,32c0,9.656,6.883,17.734,16,19.594V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-8.406 C45.117,49.734,52,41.656,52,32C52,22.891,46.051,0,32,0z"
+            fill="#b77873"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="tree-2">
+      <svg
+        stroke-width="0.00064"
+        stroke="#b77873"
+        fill="#b77873"
+        xml:space="preserve"
+        viewBox="0 0 64.00 64.00"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns="http://www.w3.org/2000/svg"
+        id="Layer_1"
+        version="1.0"
+      >
+        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+        <g
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          id="SVGRepo_tracerCarrier"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M32,0C18.148,0,12,23.188,12,32c0,9.656,6.883,17.734,16,19.594V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-8.406 C45.117,49.734,52,41.656,52,32C52,22.891,46.051,0,32,0z"
+            fill="#b77873"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="tree-3">
+      <svg
+        version="1.0"
+        id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 64.00 64.00"
+        xml:space="preserve"
+        fill="#a16773"
+        stroke="#a16773"
+        stroke-width="0.00064"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            fill="#a16773"
+            d="M32,0C18.148,0,12,23.188,12,32c0,9.656,6.883,17.734,16,19.594V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-8.406 C45.117,49.734,52,41.656,52,32C52,22.891,46.051,0,32,0z"
+          ></path>
+        </g>
+      </svg>
+    </div>
+    <div class="filter"></div>
+  </section>
+
+  <section class="content-section">
+    <div class="weather-info">
+      <div class="left-side">
+        <div class="icon">
+          <img id="weather-icon">
+        </div>
+        <p id="weather-main" style = "color: blue"></p>
+      </div>
+      <div class="right-side">
+        <div class="location">
+          <div>
+            <svg
+              version="1.0"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="64px"
+              height="64px"
+              viewBox="0 0 64 64"
+              xml:space="preserve"
+              fill="#ffffff"
+              stroke="#ffffff"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  fill="#ffffff"
+                  d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
+                ></path>
+              </g>
+            </svg>
+            <span id="location"></span>
+          </div>
+        </div>
+        <p class="date">Monday, 4th May</p>
+        <p class="temperature" id="main-temperature"></p>
+      </div>
+    </div>
+    <div class="forecast">
+       <div id="feels-like"></div>
+    <div id="humidity"></div>
+    <div id="wind"></div>
+    <div id="wind-gust"></div>
+    <div id="pressure"></div>
+      </div>
+    </div>
+  </section>
+</div></div>
+
+
+    <div class="controls">
+      <div class="options">
+        <div class="weather-text">Weather For:</div>
+    
+    <select>
+      <option value=''></option>
+      <option value='new york'>New York</option>
+      <option value='los angeles'>Los Angeles</option>
+      <option value='chicago'>Chicago</option>
+      <option value='paris'>Paris</option>
+      <option value='tokyo'>Tokyo</option>
+      <option value='london'>London</option>
+    </select></div>
+      
+     <button id ="get-weather-btn">Get Weather</button>
+    </div>
+    </main>
+  </body>
+  <script src="script.js"></script>
+</html>
