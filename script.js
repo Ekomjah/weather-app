@@ -5,7 +5,6 @@ const weatherScreen = document.getElementById('weather-screen')
 
 card.classList.toggle('hidden')
 btn.addEventListener('click', ()=>{
-  if(selectedOption.value === 'paris') alert('Something went wrong, please try again later')
   if(selectedOption.value !== ''){
     showWeather(selectedOption.value)
     
