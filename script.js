@@ -20,7 +20,7 @@ async function getWeather(city) {
   try {
     let link =
       "https://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&units=metric&appid=4672f45df8001955070ae14f83a6b7e5";
-    let str = link.slice(0, 50) + city.toLowerCase() + link.slice(61);
+    let str = link.slice(0, 50) + city.trim().toLowerCase() + link.slice(61);
     let fetches = await fetch(str);
     if (!fetches.ok) {
       alert("City not found!");
@@ -38,10 +38,8 @@ async function getWeather(city) {
 }
 
 async function showWeather(city) {
-  console.log("hi");
   let func = await getWeather(city);
   if (func.error) alert("Something went wrong, please try again later");
-  // console.log(func)
   const weatherIcon = document.getElementById("weather-icon");
   const mainTemp = document.getElementById("main-temperature");
   const feelsLike = document.getElementById("feels-like");
