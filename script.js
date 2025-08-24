@@ -10,6 +10,12 @@ btn.addEventListener("click", () => {
   }
 });
 
+selectedOption.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    btn.click();
+  }
+});
+
 async function getWeather(city) {
   try {
     let link =
