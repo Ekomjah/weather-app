@@ -4,9 +4,12 @@
   "description": "A simple beautifully crafted and easy to use app to display the weather conditions in selected locations",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack serve --open --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "dev": "webpack serve --open --mode development"
+    "build": "webpack --mode production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   },
   "homepage": "https://github.com/Ekomjah/weather-app#readme",
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "webpack-dev-server": "^5.2.2"
   }
 }
