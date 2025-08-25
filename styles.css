@@ -15,7 +15,7 @@ body {
   align-items: center;
   margin: auto;
   margin-top: 2rem;
-  max-width: 370px;
+  max-width: 500px;
 }
 h1 {
   text-align: center;
@@ -37,7 +37,7 @@ h1 {
 }
 
 main {
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   height: 100vh;
   display: flex;
@@ -80,7 +80,7 @@ input[placeholder] {
   position: relative;
   min-width: 220px;
   width: 400px;
-  height: 500px;
+  height: 750px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.1);
