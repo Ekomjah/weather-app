@@ -16,8 +16,6 @@ selectedOption.addEventListener("keydown", (e) => {
   }
 });
 
-console.log(process.env.API_KEY);
-
 async function getWeather(city) {
   try {
     let link = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.API_KEY}`;
