@@ -2,7 +2,7 @@ const card = document.querySelector(".myCard");
 const btn = document.getElementById("get-weather-btn");
 const selectedOption = document.querySelector("input");
 const weatherScreen = document.getElementById("weather-screen");
-
+import "./styles.css";
 card.classList.toggle("hidden");
 btn.addEventListener("click", () => {
   if (selectedOption.value !== "") {
@@ -16,12 +16,12 @@ selectedOption.addEventListener("keydown", (e) => {
   }
 });
 
+console.log(process.env.API_KEY);
+
 async function getWeather(city) {
   try {
-    let link =
-      "https://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&units=metric&appid=4672f45df8001955070ae14f83a6b7e5";
-    let str = link.slice(0, 50) + city.trim().toLowerCase() + link.slice(61);
-    let fetches = await fetch(str);
+    let link = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.API_KEY}`;
+    let fetches = await fetch(link);
     if (!fetches.ok) {
       alert("City not found!");
       return;

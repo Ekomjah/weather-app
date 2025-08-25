@@ -1,0 +1,25 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "A simple beautifully crafted and easy to use app to display the weather conditions in selected locations",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack serve --open --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ekomjah/weather-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ekomjah/weather-app/issues"
+  },
+  "homepage": "https://github.com/Ekomjah/weather-app#readme",
+  "devDependencies": {
+    "webpack-dev-server": "^5.2.2"
+  }
+}
