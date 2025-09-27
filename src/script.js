@@ -2,16 +2,14 @@ const card = document.querySelector(".card");
 const btn = document.getElementById("get-weather-btn");
 const selectedOption = document.querySelector("input");
 const loader = document.querySelector(".loader");
-const img = document.querySelector(".gif-img");
+const img = document.querySelector("main");
 import "./styles.css";
 let isLoading;
 
-img.classList.add("hidden");
 btn.addEventListener("click", () => {
   if (selectedOption.value !== "") {
     showWeather(selectedOption.value);
     loader.classList.remove("hidden");
-    img.classList.remove("hidden");
     setTimeout(() => {
       card.classList.remove("hidden");
       loader.classList.add("hidden");
@@ -78,11 +76,11 @@ async function showWeather(city) {
     myPressure.innerText = `${pressure ?? "N/A"}hPa`;
     console.log(description);
     const gifFetch = await fetch(
-      `https://api.giphy.com/v1/gifs/translate?api_key=FnygelUtyJNjI4XmxZJIZX5fjYaRWX2L&s=${description}`
+      `https://api.unsplash.com/search/photos?page=1&query=${description}&client_id=4an1dGuJRn7cCengE1FL59IBL_zTKqb7mamFr5DoqJ4`
     );
     const gifData = await gifFetch.json();
-    img.src = gifData.data.images.original.url;
-    // img.classList.remove("hidden");
+    const randomImg = Math.floor(Math.random() * gifData.results.length);
+    img.style.backgroundImage = `url(${gifData.results[randomImg].urls.regular})`;
   } catch (error) {
     console.error("Error fetching GIF:", error);
   }
@@ -91,3 +89,5 @@ async function showWeather(city) {
 const dateEl = document.querySelector(".date");
 const date = new Date().toLocaleDateString();
 dateEl.innerText = date;
+
+//img
