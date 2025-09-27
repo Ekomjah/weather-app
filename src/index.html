@@ -3,189 +3,124 @@
   <head>
     <meta charset="utf-8" />
     <title>Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="manifest" href="site.webmanifest">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A simple weather app built with vanilla JavaScript and Tailwind CSS." />
+    <meta name="author" content="Ekomjah Edet" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+  .loader {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #e0e0e0;
+    /* light gray background */
+    border-top: 6px solid blue;
+    /* blue color for spinner */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+    /* center horizontally */
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+ 
+    }
+    
+</style>
   </head>
 
-  <body>
-    <h1>A Weather App</h1>
-    <main>
-      <!-- From Uiverse.io by KSAplay --> 
-      <div class="myCard hidden">
-<div class="card">
-  <section class="landscape-section">
-    <div class="sky"></div>
-    <div class="sun"></div>
-    <div class="hill-1"></div>
-    <div class="hill-2"></div>
-    <div class="ocean">
-      <div class="reflection"></div>
-      <div class="reflection"></div>
-      <div class="reflection"></div>
-      <div class="reflection"></div>
-      <div class="reflection"></div>
-      <div class="shadow-hill-1"></div>
-      <div class="shadow-hill-2"></div>
-    </div>
-    <div class="hill-3"></div>
-    <div class="hill-4"></div>
-    <div class="tree-1">
-      <svg
-        stroke-width="0.00064"
-        stroke="#b77873"
-        fill="#b77873"
-        xml:space="preserve"
-        viewBox="0 0 64.00 64.00"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        xmlns="http://www.w3.org/2000/svg"
-        id="Layer_1"
-        version="1.0"
-      >
-        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-        <g
-          stroke-linejoin="round"
-          stroke-linecap="round"
-          id="SVGRepo_tracerCarrier"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <path
-            d="M32,0C18.148,0,12,23.188,12,32c0,9.656,6.883,17.734,16,19.594V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-8.406 C45.117,49.734,52,41.656,52,32C52,22.891,46.051,0,32,0z"
-            fill="#b77873"
-          ></path>
-        </g>
-      </svg>
-    </div>
-    <div class="tree-2">
-      <svg
-        stroke-width="0.00064"
-        stroke="#b77873"
-        fill="#b77873"
-        xml:space="preserve"
-        viewBox="0 0 64.00 64.00"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        xmlns="http://www.w3.org/2000/svg"
-        id="Layer_1"
-        version="1.0"
-      >
-        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-        <g
-          stroke-linejoin="round"
-          stroke-linecap="round"
-          id="SVGRepo_tracerCarrier"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <path
-            d="M32,0C18.148,0,12,23.188,12,32c0,9.656,6.883,17.734,16,19.594V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-8.406 C45.117,49.734,52,41.656,52,32C52,22.891,46.051,0,32,0z"
-            fill="#b77873"
-          ></path>
-        </g>
-      </svg>
-    </div>
-    <div class="tree-3">
-      <svg
-        version="1.0"
-        id="Layer_1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 64.00 64.00"
-        xml:space="preserve"
-        fill="#a16773"
-        stroke="#a16773"
-        stroke-width="0.00064"
-      >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <path
-            fill="#a16773"
-            d="M32,0C18.148,0,12,23.188,12,32c0,9.656,6.883,17.734,16,19.594V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-8.406 C45.117,49.734,52,41.656,52,32C52,22.891,46.051,0,32,0z"
-          ></path>
-        </g>
-      </svg>
-    </div>
-    <div class="filter"></div>
-  </section>
-
-  <section class="content-section">
-    <div class="weather-info">
-      <div class="left-side">
-        <div class="icon">
-          <img id="weather-icon">
-        </div>
-        <p id="weather-main" style = "color: blue"></p>
-      </div>
-      <div class="right-side">
-        <div class="location">
-          <div>
-            <svg
-              version="1.0"
-              id="Layer_1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="64px"
-              height="64px"
-              viewBox="0 0 64 64"
-              xml:space="preserve"
-              fill="#ffffff"
-              stroke="#ffffff"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  fill="#ffffff"
-                  d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"
-                ></path>
-              </g>
-            </svg>
-            <span id="location"></span>
-          </div>
-        </div>
-        <p class="date">Monday, 4th May</p>
-        <p class="temperature" id="main-temperature"></p>
-      </div>
-    </div>
-    <div class="forecast">
-       <div id="feels-like"></div>
-    <div id="humidity"></div>
-    <div id="wind"></div>
-    <div id="wind-gust"></div>
-    <div id="pressure"></div>
-      </div>
-    </div>
-  </section>
-</div></div>
-
-
+  <body> 
     <div class="controls">
-      <div class="options">
-        <div class="weather-text">Weather For:</div>
-    
-    <!-- <select>
-      <option value=''></option>
-      <option value='new york'>New York</option>
-      <option value='los angeles'>Los Angeles</option>
-      <option value='chicago'>Chicago</option>
-      <option value='paris'>Paris</option>
-      <option value='tokyo'>Tokyo</option>
-      <option value='london'>London</option>
-    </select>-->
-  <input type="text" name="location" placeholder="Any location Ex: London" id="location">  
-  </div> 
-      
+        <input type="search" name="location" placeholder="Search a location's weather" id="thelocation">  
      <button id ="get-weather-btn">Get Weather</button>
+      </div> 
+    <main>
+         <h1 class="font-semibold text-4xl text-blue-950 p-5">A Weather App</h1>
+    <div class="flex min-h-[100vh] width-[80%] max-w-[800px] items-center justify-center mx-auto -mt-[5rem]">
+      <img src="" alt="some-img" class="gif-img" class="hidden"/>
+      <div class="loader hidden"></div>
+<!-- Weather card (Tailwind) -->
+<div id="weather-card" class="card hidden max-w-xl mx-auto bg-gradient-to-br from-blue-500 to-white shadow-lg rounded-2xl p-6 ring-1 ring-slate-200">
+  <!-- Top row: icon + main info -->
+  <div class="flex items-center gap-4">
+    <!-- left: icon + main temp -->
+    <div class="flex items-center gap-4">
+      <div class="w-24 h-24 bg-sky-700 rounded-xl flex items-center justify-center shadow-inner">
+        <img id="weather-icon" class="w-20 h-20" alt="weather icon" />
+      </div>
+
+      <div class="text-left">
+        <p id="weather-main" class="text-lg font-semibold text-sky-700">Weather</p>
+        <p id="main-temperature" class="text-4xl font-extrabold text-slate-800 mt-1">--°C</p>
+      </div>
     </div>
+
+    <!-- right: location + date -->
+    <div class="ml-auto text-right">
+      <div class="flex items-center justify-end gap-2 text-slate-600">
+        <!-- small location icon -->
+        <svg class="w-6 h-6 text-red-500" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="#fff" d="M32,0C18.746,0,8,10.746,8,24c0,5.219,1.711,10.008,4.555,13.93c0.051,0.094,0.059,0.199,0.117,0.289l16,24 C29.414,63.332,30.664,64,32,64s2.586-0.668,3.328-1.781l16-24c0.059-0.09,0.066-0.195,0.117-0.289C54.289,34.008,56,29.219,56,24 C56,10.746,45.254,0,32,0z M32,32c-4.418,0-8-3.582-8-8s3.582-8,8-8s8,3.582,8,8S36.418,32,32,32z"/>
+        </svg>
+        <span id="location" class="text-sm font-medium text-slate-800">Unknown</span>
+      </div>
+      <p class="date text-xs text-slate-500 mt-1">—</p>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="my-4 border-t border-slate-100"></div>
+
+  <!-- Forecast / details grid -->
+  <div class="grid grid-cols-2 gap-3">
+    <div class="p-3 bg-white/80 rounded-lg shadow-sm flex flex-col">
+      <span class="text-xs text-slate-500">Feels like</span>
+      <span id="feels-like" class="mt-1 text-lg font-medium text-slate-800">--°C</span>
+    </div>
+
+    <div class="p-3 bg-white/80 rounded-lg shadow-sm flex flex-col">
+      <span class="text-xs text-slate-500">Humidity</span>
+      <span id="humidity" class="mt-1 text-lg font-medium text-slate-800">--%</span>
+    </div>
+
+    <div class="p-3 bg-white/80 rounded-lg shadow-sm flex flex-col">
+      <span class="text-xs text-slate-500">Wind speed</span>
+      <span id="wind" class="mt-1 text-lg font-medium text-slate-800">-- m/s</span>
+    </div>
+
+    <div class="p-3 bg-white/80 rounded-lg shadow-sm flex flex-col">
+      <span class="text-xs text-slate-500">Wind gust</span>
+      <span id="wind-gust" class="mt-1 text-lg font-medium text-slate-800">-- m/s</span>
+    </div>
+
+    <div class="col-span-2 p-3 bg-white/90 rounded-lg shadow-sm flex items-center justify-between">
+      <div>
+        <span class="text-xs text-slate-500">Pressure</span>
+        <div id="pressure" class="mt-1 text-sm font-medium text-slate-800">-- hPa</div>
+      </div>
+      <div class="text-right">
+        <span class="text-xs text-slate-500">Visibility</span>
+        <div id="visibility" class="mt-1 text-sm font-medium text-slate-800">-- m</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+   </div>
     </main>
   </body>
   <script src="script.js"></script>

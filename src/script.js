@@ -1,12 +1,24 @@
-const card = document.querySelector(".myCard");
+const card = document.querySelector(".card");
 const btn = document.getElementById("get-weather-btn");
 const selectedOption = document.querySelector("input");
-const weatherScreen = document.getElementById("weather-screen");
+const loader = document.querySelector(".loader");
+const img = document.querySelector(".gif-img");
 import "./styles.css";
-card.classList.toggle("hidden");
+let isLoading;
+
+img.classList.add("hidden");
 btn.addEventListener("click", () => {
   if (selectedOption.value !== "") {
     showWeather(selectedOption.value);
+    loader.classList.remove("hidden");
+    img.classList.remove("hidden");
+    setTimeout(() => {
+      card.classList.remove("hidden");
+      loader.classList.add("hidden");
+    }, 2500);
+    isLoading = true;
+  } else {
+    alert("Please enter a city name");
   }
 });
 
@@ -36,31 +48,44 @@ async function getWeather(city) {
 }
 
 async function showWeather(city) {
-  let func = await getWeather(city);
-  if (func.error) alert("Something went wrong, please try again later");
-  const weatherIcon = document.getElementById("weather-icon");
-  const mainTemp = document.getElementById("main-temperature");
-  const feelsLike = document.getElementById("feels-like");
-  const humidityIs = document.getElementById("humidity");
-  const windIs = document.getElementById("wind");
-  const windGust = document.getElementById("wind-gust");
-  const weatherMain = document.getElementById("weather-main");
-  const location = document.getElementById("location");
-  const myPressure = document.getElementById("pressure");
-  const { weather, main, visibility, wind, name, cod } = func;
-  const [{ description, icon }] = weather;
-  const { temp, feels_like, pressure, humidity } = main;
-  const { speed, deg, gust } = wind;
-  let myImgSrc = icon ?? "N/A";
-  weatherIcon.src = `https://openweathermap.org/img/wn/${myImgSrc}@2x.png`;
-  mainTemp.innerText = `${temp ?? "N/A"}°C`;
-  feelsLike.innerText = `Feels like: ${feels_like ?? "N/A"}°C`;
-  humidityIs.innerText = `Humidity: ${humidity ?? "N/A"}%`;
-  windIs.innerText = `Wind Speed: ${speed ?? "N/A"}m/s`;
-  windGust.innerText = `Wind Gust: ${gust ?? "N/A"}m/s`;
-  weatherMain.innerText = description.toUpperCase() ?? "N/A";
-  location.innerText = name ?? "N/A";
-  myPressure.innerText = `Atmospheric Pressure: ${pressure ?? "N/A"}hPa`;
+  try {
+    let func = await getWeather(city);
+    if (func.error) alert("Something went wrong, please try again later");
+    const weatherIcon = document.getElementById("weather-icon");
+    const mainTemp = document.getElementById("main-temperature");
+    const feelsLike = document.getElementById("feels-like");
+    const humidityIs = document.getElementById("humidity");
+    const windIs = document.getElementById("wind");
+    const windGust = document.getElementById("wind-gust");
+    const weatherMain = document.getElementById("weather-main");
+    const location = document.getElementById("location");
+    const myPressure = document.getElementById("pressure");
+    const { weather, main, visibility, wind, name, cod } = func;
+    console.log("hi");
+    console.log(name);
+    const [{ description, icon }] = weather;
+    const { temp, feels_like, pressure, humidity } = main;
+    const { speed, deg, gust } = wind;
+    let myImgSrc = icon ?? "N/A";
+    weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+    mainTemp.innerText = `${temp ?? "N/A"}°C`;
+    feelsLike.innerText = `${feels_like ?? "N/A"}°C`;
+    humidityIs.innerText = `${humidity ?? "N/A"}%`;
+    windIs.innerText = `${speed ?? "N/A"}m/s`;
+    windGust.innerText = `${gust ?? "N/A"}m/s`;
+    weatherMain.innerText = description.toUpperCase() ?? "N/A";
+    location.innerText = `Location: ${name}`;
+    myPressure.innerText = `${pressure ?? "N/A"}hPa`;
+    console.log(description);
+    const gifFetch = await fetch(
+      `https://api.giphy.com/v1/gifs/translate?api_key=FnygelUtyJNjI4XmxZJIZX5fjYaRWX2L&s=${description}`
+    );
+    const gifData = await gifFetch.json();
+    img.src = gifData.data.images.original.url;
+    // img.classList.remove("hidden");
+  } catch (error) {
+    console.error("Error fetching GIF:", error);
+  }
 }
 
 const dateEl = document.querySelector(".date");
