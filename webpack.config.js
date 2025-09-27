@@ -12,7 +12,7 @@ module.exports = {
     rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new HtmlWebpackPlugin({ template: "./index.html" }),
     new Dotenv(),
   ],
   stats: {
