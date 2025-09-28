@@ -58,13 +58,12 @@ async function showWeather(city) {
     const weatherMain = document.getElementById("weather-main");
     const location = document.getElementById("location");
     const myPressure = document.getElementById("pressure");
-    const { weather, main, visibility, wind, name, cod } = func;
+    const { coord, weather, main, visibility, wind, name, cod } = func;
     console.log("hi");
     console.log(name);
     const [{ description, icon }] = weather;
     const { temp, feels_like, pressure, humidity } = main;
     const { speed, deg, gust } = wind;
-    let myImgSrc = icon ?? "N/A";
     weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
     mainTemp.innerText = `${temp ?? "N/A"}°C`;
     feelsLike.innerText = `${feels_like ?? "N/A"}°C`;
@@ -81,11 +80,30 @@ async function showWeather(city) {
     const gifData = await gifFetch.json();
     const randomImg = Math.floor(Math.random() * gifData.results.length);
     img.style.backgroundImage = `url(${gifData.results[randomImg].urls.regular})`;
+    const uvIndex = await openUV(coord.lat, coord.lon);
+    console.log(uvIndex);
+    document.getElementById("uv").innerText = uvIndex;
   } catch (error) {
     console.error("Error fetching GIF:", error);
   }
 }
 
+async function openUV(lat, lon) {
+  const data = await fetch(
+    `https://api.openuv.io/api/v1/uv?lat=${lat}&lng=${lon}`,
+    {
+      method: "GET",
+      headers: {
+        "x-access-token": process.env.UV_KEY,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const uvData = await data.json();
+  console.log(uvData.results);
+  return uvData.result.uv;
+}
+console.log(openUV(-0.1257, 51.5085));
 const dateEl = document.querySelector(".date");
 const date = new Date().toLocaleDateString();
 dateEl.innerText = date;
