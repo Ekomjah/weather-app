@@ -9,17 +9,19 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    publicPath: "/weather-app/", // Add this line
   },
   module: {
     rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "./index.html" }),
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+      favicon: "./public/favicon.ico", // Add this line to explicitly handle favicon
+    }),
     new Dotenv(),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: "public", to: "." }, // copies public/* → dist/public/*
-      ],
+      patterns: [{ from: "public", to: "." }],
     }),
   ],
   stats: {

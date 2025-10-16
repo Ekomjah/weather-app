@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/Ekomjah/weather-app/issues"
   },
-  "homepage": "https://github.com/Ekomjah/weather-app#readme",
+  "homepage": "https://ekomjah.github.io/weather-app",
   "devDependencies": {
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.2",
