@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="A simple weather app built with vanilla JavaScript and Tailwind CSS." />
     <meta name="author" content="Ekomjah Edet" />
@@ -16,7 +17,7 @@
 
   <body> 
     <div class="controls">
-        <input type="search" name="location" placeholder="Search a location's weather" id="thelocation">  
+        <input type="search" class="bg-gray-100 text-lg font-sans" name="location" placeholder="Search a location's weather" id="thelocation">  
      <button id ="get-weather-btn">Get Weather</button>
       </div> 
     <main>
@@ -96,5 +97,6 @@
 
    </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
   </body>
 </html>

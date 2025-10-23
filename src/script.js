@@ -1,4 +1,5 @@
 import "./styles.css";
+import { Notyf } from "notyf";
 
 const card = document.querySelector(".card");
 const btn = document.getElementById("get-weather-btn");
@@ -6,20 +7,51 @@ const selectedOption = document.querySelector("input");
 const loader = document.querySelector(".loader");
 const img = document.querySelector("main");
 let isLoading;
-
+let alert = new Notyf({
+  duration: 2000,
+  position: {
+    x: "center",
+    y: "top",
+  },
+  types: [
+    {
+      type: "warning",
+      background: "orange",
+      icon: {
+        className: "material-icons",
+        tagName: "i",
+        text: "warning",
+      },
+    },
+    {
+      type: "error",
+      background: "red",
+      duration: 3000,
+    },
+  ],
+});
 btn.addEventListener("click", async () => {
   if (selectedOption.value.trim() !== "") {
     loader.classList.remove("hidden");
     card.classList.add("hidden");
-    await showWeather(selectedOption.value);
+    const values = await showWeather(selectedOption.value);
     while (isLoading) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
-
-    card.classList.remove("hidden");
-    loader.classList.add("hidden");
+    console.log(values);
+    if (values === null) {
+      loader.classList.add("hidden");
+      card.classList.add("hidden");
+      console.log("values is invalid");
+      return;
+    } else {
+      card.classList.remove("hidden");
+      loader.classList.add("hidden");
+      return;
+    }
   } else {
-    alert("Please enter a city name");
+    alert.error("Please enter a city name");
+    return;
   }
 });
 
@@ -34,14 +66,14 @@ async function getWeather(city) {
     let link = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.API_KEY}`;
     let fetches = await fetch(link);
     if (!fetches.ok) {
-      alert("City not found!");
-      return;
+      alert.error("City not found!");
+      return null;
     }
     let response = await fetches.json();
     return response;
   } catch (error) {
     console.error("Error fetching weather data:", error);
-    alert(
+    alert.error(
       "Not able to fetch weather data. Please check the city name and your internet connection."
     );
     return { error: true };
@@ -52,7 +84,10 @@ async function showWeather(city) {
   try {
     isLoading = true;
     let func = await getWeather(city);
-    if (func.error) alert("Something went wrong, please try again later");
+    if (func.error || func === null) {
+      alert.error("Something went wrong, please try again later");
+      return null;
+    }
     const weatherIcon = document.getElementById("weather-icon");
     const mainTemp = document.getElementById("main-temperature");
     const feelsLike = document.getElementById("feels-like");
@@ -87,8 +122,11 @@ async function showWeather(city) {
     const uvIndex = await openUV(coord.lat, coord.lon);
     console.log(uvIndex);
     document.getElementById("uv").innerText = uvIndex;
+    return { func, gifData };
   } catch (error) {
-    console.error("Error fetching GIF:", error);
+    console.error("Error: ", error);
+    alert.error("You have used all your tokens for today. Come back tomorrow");
+    return null;
   } finally {
     isLoading = false;
   }
@@ -113,5 +151,3 @@ async function openUV(lat, lon) {
 const dateEl = document.querySelector(".date");
 const date = new Date().toLocaleDateString();
 dateEl.innerText = date;
-
-//img
