@@ -79,7 +79,7 @@ async function showWeather(city) {
     myPressure.innerText = `${pressure ?? "--"}hPa`;
     console.log(description);
     const gifFetch = await fetch(
-      `https://api.unsplash.com/search/photos?page=1&query=${description}&client_id=4an1dGuJRn7cCengE1FL59IBL_zTKqb7mamFr5DoqJ4`
+      `https://api.unsplash.com/search/photos?page=1&query=${description}&client_id=${process.env.UNSPLASH_KEY}`
     );
     const gifData = await gifFetch.json();
     const randomImg = Math.floor(Math.random() * gifData.results.length);
