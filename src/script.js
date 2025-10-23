@@ -1,9 +1,10 @@
+import "./styles.css";
+
 const card = document.querySelector(".card");
 const btn = document.getElementById("get-weather-btn");
 const selectedOption = document.querySelector("input");
 const loader = document.querySelector(".loader");
 const img = document.querySelector("main");
-import "./styles.css";
 let isLoading;
 
 btn.addEventListener("click", () => {
@@ -65,14 +66,14 @@ async function showWeather(city) {
     const { temp, feels_like, pressure, humidity } = main;
     const { speed, deg, gust } = wind;
     weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
-    mainTemp.innerText = `${temp ?? "N/A"}°C`;
-    feelsLike.innerText = `${feels_like ?? "N/A"}°C`;
-    humidityIs.innerText = `${humidity ?? "N/A"}%`;
-    windIs.innerText = `${speed ?? "N/A"}m/s`;
-    windGust.innerText = `${gust ?? "N/A"}m/s`;
-    weatherMain.innerText = description.toUpperCase() ?? "N/A";
+    mainTemp.innerText = `${temp ?? "--"}°C`;
+    feelsLike.innerText = `${feels_like ?? "--"}°C`;
+    humidityIs.innerText = `${humidity ?? "--"}%`;
+    windIs.innerText = `${speed ?? "--"}m/s`;
+    windGust.innerText = `${gust ?? "--"}m/s`;
+    weatherMain.innerText = description.toUpperCase() ?? "--";
     location.innerText = `Location: ${name}`;
-    myPressure.innerText = `${pressure ?? "N/A"}hPa`;
+    myPressure.innerText = `${pressure ?? "--"}hPa`;
     console.log(description);
     const gifFetch = await fetch(
       `https://api.unsplash.com/search/photos?page=1&query=${description}&client_id=4an1dGuJRn7cCengE1FL59IBL_zTKqb7mamFr5DoqJ4`
