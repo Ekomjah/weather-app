@@ -7,15 +7,17 @@ const loader = document.querySelector(".loader");
 const img = document.querySelector("main");
 let isLoading;
 
-btn.addEventListener("click", () => {
-  if (selectedOption.value !== "") {
-    showWeather(selectedOption.value);
+btn.addEventListener("click", async () => {
+  if (selectedOption.value.trim() !== "") {
     loader.classList.remove("hidden");
-    setTimeout(() => {
-      card.classList.remove("hidden");
-      loader.classList.add("hidden");
-    }, 2500);
-    isLoading = true;
+    card.classList.add("hidden");
+    await showWeather(selectedOption.value);
+    while (isLoading) {
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    card.classList.remove("hidden");
+    loader.classList.add("hidden");
   } else {
     alert("Please enter a city name");
   }
@@ -48,6 +50,7 @@ async function getWeather(city) {
 
 async function showWeather(city) {
   try {
+    isLoading = true;
     let func = await getWeather(city);
     if (func.error) alert("Something went wrong, please try again later");
     const weatherIcon = document.getElementById("weather-icon");
@@ -86,6 +89,8 @@ async function showWeather(city) {
     document.getElementById("uv").innerText = uvIndex;
   } catch (error) {
     console.error("Error fetching GIF:", error);
+  } finally {
+    isLoading = false;
   }
 }
 
@@ -104,7 +109,7 @@ async function openUV(lat, lon) {
   console.log(uvData.results);
   return uvData.result.uv;
 }
-console.log(openUV(-0.1257, 51.5085));
+
 const dateEl = document.querySelector(".date");
 const date = new Date().toLocaleDateString();
 dateEl.innerText = date;
